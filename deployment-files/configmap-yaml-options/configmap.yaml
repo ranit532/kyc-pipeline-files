@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kyc-service-config
+  namespace: kyc-service
+data:
+  # IT Environment
+  IT_DATABASE_URL: "jdbc:mysql://it-db.example.com:3306/kycdb"
+  IT_DATABASE_USERNAME: "it_user"
+  IT_DATABASE_PASSWORD: "it_password"
+  IT_API_ENDPOINT: "https://it-api.example.com"
+  IT_LOG_LEVEL: "DEBUG"
+  IT_CACHE_ENABLED: "true"
+  IT_CACHE_EXPIRY: "3600"
+
+  # DEV Environment
+  DEV_DATABASE_URL: "jdbc:mysql://dev-db.example.com:3306/kycdb"
+  DEV_DATABASE_USERNAME: "dev_user"
+  DEV_DATABASE_PASSWORD: "dev_password"
+  DEV_API_ENDPOINT: "https://dev-api.example.com"
+  DEV_LOG_LEVEL: "DEBUG"
+  DEV_CACHE_ENABLED: "true"
+  DEV_CACHE_EXPIRY: "3600"
+
+  # UAT Environment
+  UAT_DATABASE_URL: "jdbc:mysql://uat-db.example.com:3306/kycdb"
+  UAT_DATABASE_USERNAME: "uat_user"
+  UAT_DATABASE_PASSWORD: "uat_password"
+  UAT_API_ENDPOINT: "https://uat-api.example.com"
+  UAT_LOG_LEVEL: "INFO"
+  UAT_CACHE_ENABLED: "true"
+  UAT_CACHE_EXPIRY: "3600"
+
+  # PERF Environment
+  PERF_DATABASE_URL: "jdbc:mysql://perf-db.example.com:3306/kycdb"
+  PERF_DATABASE_USERNAME: "perf_user"
+  PERF_DATABASE_PASSWORD: "perf_password"
+  PERF_API_ENDPOINT: "https://perf-api.example.com"
+  PERF_LOG_LEVEL: "INFO"
+  PERF_CACHE_ENABLED: "true"
+  PERF_CACHE_EXPIRY: "3600"
+
+  # PRE-PROD Environment
+  PREPROD_DATABASE_URL: "jdbc:mysql://preprod-db.example.com:3306/kycdb"
+  PREPROD_DATABASE_USERNAME: "preprod_user"
+  PREPROD_DATABASE_PASSWORD: "preprod_password"
+  PREPROD_API_ENDPOINT: "https://preprod-api.example.com"
+  PREPROD_LOG_LEVEL: "WARN"
+  PREPROD_CACHE_ENABLED: "true"
+  PREPROD_CACHE_EXPIRY: "3600"
+
+  # PROD Environment
+  PROD_DATABASE_URL: "jdbc:mysql://prod-db.example.com:3306/kycdb"
+  PROD_DATABASE_USERNAME: "prod_user"
+  PROD_DATABASE_PASSWORD: "prod_password"
+  PROD_API_ENDPOINT: "https://prod-api.example.com"
+  PROD_LOG_LEVEL: "ERROR"
+  PROD_CACHE_ENABLED: "true"
+  PROD_CACHE_EXPIRY: "3600"

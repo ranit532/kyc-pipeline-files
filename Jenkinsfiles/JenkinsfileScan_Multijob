@@ -1,0 +1,287 @@
+@Library('pipeline@master') _
+
+class ScanJobParams {
+    String url
+    Map<String, Object> parameters
+    boolean isValid
+
+    ScanJobParams(String url, Map<String, Object> parameters, boolean isValid) {
+        this.url = url
+        this.parameters = parameters
+        this.isValid = isValid
+    }
+}
+
+class JobParamsWrapper {
+    List<ScanJobParams> scanJobParamsList = []
+
+    void addScanJobParams(ScanJobParams params) {
+        scanJobParamsList.add(params)
+    }
+
+    void configureJobParams(Map<String, Object> jsonConfig) {
+        scanJobParamsList.each { params ->
+            params.parameters.each { key, value ->
+                if (jsonConfig.containsKey(key)) {
+                    params.parameters[key] = jsonConfig[key]
+                }
+            }
+        }
+    }
+}
+
+def jobParamsWrapper = new JobParamsWrapper()
+
+// Adding sample scan job parameters
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job1',
+    [branch: 'main', sonarqube: true, fortify: false, blackduck: true, prismacloud: false],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job2',
+    [branch: 'develop', sonarqube: true, fortify: true, blackduck: false, prismacloud: true],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job3',
+    [branch: 'feature-branch', sonarqube: true, fortify: false, blackduck: true, prismacloud: false],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job4',
+    [branch: 'release', sonarqube: true, fortify: true, blackduck: false, prismacloud: true],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job5',
+    [branch: 'hotfix', sonarqube: true, fortify: false, blackduck: true, prismacloud: false],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job6',
+    [branch: 'main', sonarqube: true, fortify: true, blackduck: false, prismacloud: true],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job7',
+    [branch: 'develop', sonarqube: true, fortify: false, blackduck: true, prismacloud: false],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job8',
+    [branch: 'feature-branch', sonarqube: true, fortify: true, blackduck: false, prismacloud: true],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job9',
+    [branch: 'release', sonarqube: true, fortify: false, blackduck: true, prismacloud: false],
+    true
+))
+
+jobParamsWrapper.addScanJobParams(new ScanJobParams(
+    'http://jenkins.example.com/job/Job10',
+    [branch: 'hotfix', sonarqube: true, fortify: true, blackduck: false, prismacloud: true],
+    true
+))
+
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+            apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+              - name: jnlp
+                image: jenkins/inbound-agent
+                args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+              - name: kubectl
+                image: bitnami/kubectl
+                command:
+                - cat
+                tty: true
+            """
+        }
+    }
+    stages {
+        stage('Job1') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[0].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[0].parameters
+                    echo "Running Job1 with URL: ${jobParamsWrapper.scanJobParamsList[0].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job2') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[1].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[1].parameters
+                    echo "Running Job2 with URL: ${jobParamsWrapper.scanJobParamsList[1].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job3') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[2].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[2].parameters
+                    echo "Running Job3 with URL: ${jobParamsWrapper.scanJobParamsList[2].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job4') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[3].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[3].parameters
+                    echo "Running Job4 with URL: ${jobParamsWrapper.scanJobParamsList[3].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job5') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[4].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[4].parameters
+                    echo "Running Job5 with URL: ${jobParamsWrapper.scanJobParamsList[4].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job6') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[5].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[5].parameters
+                    echo "Running Job6 with URL: ${jobParamsWrapper.scanJobParamsList[5].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job7') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[6].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[6].parameters
+                    echo "Running Job7 with URL: ${jobParamsWrapper.scanJobParamsList[6].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job8') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[7].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[7].parameters
+                    echo "Running Job8 with URL: ${jobParamsWrapper.scanJobParamsList[7].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job9') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[8].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[8].parameters
+                    echo "Running Job9 with URL: ${jobParamsWrapper.scanJobParamsList[8].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+        stage('Job10') {
+            when {
+                expression { jobParamsWrapper.scanJobParamsList[9].isValid }
+            }
+            steps {
+                script {
+                    def params = jobParamsWrapper.scanJobParamsList[9].parameters
+                    echo "Running Job10 with URL: ${jobParamsWrapper.scanJobParamsList[9].url}"
+                    echo "Branch: ${params.branch}"
+                    echo "SonarQube: ${params.sonarqube}"
+                    echo "Fortify: ${params.fortify}"
+                    echo "BlackDuck: ${params.blackduck}"
+                    echo "PrismaCloud: ${params.prismacloud}"
+                    // Add build steps here
+                }
+            }
+        }
+    }
+}

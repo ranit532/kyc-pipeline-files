@@ -1,0 +1,144 @@
+{
+    "applications": [
+      {
+        "name": "App1",
+        "description": "Automated test configuration for App1",
+        "project_url": "http://jenkins.example.com/job/App1",
+        "params": {
+          "branch": "main",
+          "version_strategy": "semantic",
+          "jira_story": "JIRA-1234",
+          "deployment_env_number": "1",
+          "deployment_version_strategy": "rolling",
+          "change_task_number_uat": "CT-5678",
+          "change_task_number_prod": "CT-91011"
+        }
+      },
+      {
+        "name": "App2",
+        "description": "Automated test configuration for App2",
+        "project_url": "http://jenkins.example.com/job/App2",
+        "params": {
+          "branch": "develop",
+          "version_strategy": "incremental",
+          "jira_story": "JIRA-2345",
+          "deployment_env_number": "2",
+          "deployment_version_strategy": "blue-green",
+          "change_task_number_uat": "CT-6789",
+          "change_task_number_prod": "CT-101112"
+        }
+      },
+      {
+        "name": "App3",
+        "description": "Automated test configuration for App3",
+        "project_url": "http://jenkins.example.com/job/App3",
+        "params": {
+          "branch": "feature-branch",
+          "version_strategy": "semantic",
+          "jira_story": "JIRA-3456",
+          "deployment_env_number": "3",
+          "deployment_version_strategy": "canary",
+          "change_task_number_uat": "CT-7890",
+          "change_task_number_prod": "CT-111213"
+        }
+      },
+      {
+        "name": "App4",
+        "description": "Automated test configuration for App4",
+        "project_url": "http://jenkins.example.com/job/App4",
+        "params": {
+          "branch": "release",
+          "version_strategy": "incremental",
+          "jira_story": "JIRA-4567",
+          "deployment_env_number": "4",
+          "deployment_version_strategy": "rolling",
+          "change_task_number_uat": "CT-8901",
+          "change_task_number_prod": "CT-121314"
+        }
+      },
+      {
+        "name": "App5",
+        "description": "Automated test configuration for App5",
+        "project_url": "http://jenkins.example.com/job/App5",
+        "params": {
+          "branch": "hotfix",
+          "version_strategy": "semantic",
+          "jira_story": "JIRA-5678",
+          "deployment_env_number": "5",
+          "deployment_version_strategy": "blue-green",
+          "change_task_number_uat": "CT-9012",
+          "change_task_number_prod": "CT-131415"
+        }
+      },
+      {
+        "name": "App6",
+        "description": "Automated test configuration for App6",
+        "project_url": "http://jenkins.example.com/job/App6",
+        "params": {
+          "branch": "main",
+          "version_strategy": "incremental",
+          "jira_story": "JIRA-6789",
+          "deployment_env_number": "6",
+          "deployment_version_strategy": "canary",
+          "change_task_number_uat": "CT-0123",
+          "change_task_number_prod": "CT-141516"
+        }
+      },
+      {
+        "name": "App7",
+        "description": "Automated test configuration for App7",
+        "project_url": "http://jenkins.example.com/job/App7",
+        "params": {
+          "branch": "develop",
+          "version_strategy": "semantic",
+          "jira_story": "JIRA-7890",
+          "deployment_env_number": "7",
+          "deployment_version_strategy": "rolling",
+          "change_task_number_uat": "CT-1234",
+          "change_task_number_prod": "CT-151617"
+        }
+      },
+      {
+        "name": "App8",
+        "description": "Automated test configuration for App8",
+        "project_url": "http://jenkins.example.com/job/App8",
+        "params": {
+          "branch": "feature-branch",
+          "version_strategy": "incremental",
+          "jira_story": "JIRA-8901",
+          "deployment_env_number": "8",
+          "deployment_version_strategy": "blue-green",
+          "change_task_number_uat": "CT-2345",
+          "change_task_number_prod": "CT-161718"
+        }
+      },
+      {
+        "name": "App9",
+        "description": "Automated test configuration for App9",
+        "project_url": "http://jenkins.example.com/job/App9",
+        "params": {
+          "branch": "release",
+          "version_strategy": "semantic",
+          "jira_story": "JIRA-9012",
+          "deployment_env_number": "9",
+          "deployment_version_strategy": "canary",
+          "change_task_number_uat": "CT-3456",
+          "change_task_number_prod": "CT-171819"
+        }
+      },
+      {
+        "name": "App10",
+        "description": "Automated test configuration for App10",
+        "project_url": "http://jenkins.example.com/job/App10",
+        "params": {
+          "branch": "hotfix",
+          "version_strategy": "incremental",
+          "jira_story": "JIRA-0123",
+          "deployment_env_number": "10",
+          "deployment_version_strategy": "rolling",
+          "change_task_number_uat": "CT-4567",
+          "change_task_number_prod": "CT-181920"
+        }
+      }
+    ]
+  }
